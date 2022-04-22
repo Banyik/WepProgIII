@@ -18,11 +18,13 @@ use App\Http\Controllers\PostController;
 */
 Route::group(['middleware' => 'web'], function () {
     Route::group(['middleware' => [LoggedInMiddleware::class]], function() {
-        Route::get('/', [UserController::class, 'home']);
+        Route::get('/', [UserController::class, 'home'])->name('home');
         Route::get('/home', [UserController::class, 'home']);
         Route::get('/logout', [UserController::class, 'logout']);
-        Route::get('/post', [PostController::class, 'post_site'])->name('post');
-        Route::post('/post', [PostController::class, 'post'])->name('postvalidate');
+        Route::get('/create-post', [PostController::class, 'post_site'])->name('create_post');
+        Route::post('/post-validate', [PostController::class, 'post_validate'])->name('post_validate');
+        Route::get('/post/{id}', [PostController::class, 'post'])->name('post');
+        Route::post('/post-comment/{id}', [PostController::class, 'post_comment'])->name('post_comment');
     });
     Route::group(['middleware' => [GuestMiddleware::class]], function() {
         Route::get('/login', [UserController::class, 'login_page']);

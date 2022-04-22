@@ -16,4 +16,7 @@ class Post extends Model
         'post_title',
         'post'
     ];
+    public function post(){
+        return $this->hasOne(User::class, 'id');
+    }
 }

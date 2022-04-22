@@ -44,4 +44,5 @@ class User extends Authenticatable
     public function auth(){
         return $this->hasOne(Auth::class, 'user_id');
     }
+
 }

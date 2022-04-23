@@ -19,11 +19,13 @@ class User extends Authenticatable
      */
     protected $primaryKey = 'id';
     public $incrementing = true;
+    public $timestamps = true;
     protected $fillable = [
         'id',
         'name',
         'email',
         'password',
+        'created_at'
     ];
 
     /**

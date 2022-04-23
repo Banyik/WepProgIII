@@ -10,13 +10,15 @@ class Post extends Model
     use HasFactory;
     protected $primaryKey = 'id';
     public $incrementing = true;
+    public $timestamps = true;
     protected $fillable = [
         'id',
         'user_id',
         'post_title',
-        'post'
+        'post',
+        'created_at'
     ];
-    public function post(){
-        return $this->hasOne(User::class, 'id');
+    public function user(){
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

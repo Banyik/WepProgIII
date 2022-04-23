@@ -1,14 +1,16 @@
 @extends('layout.master')
 @section('title', $id->post_title)
 @section('content')
-    @php use App\Models\User; @endphp
+    @php
+        use App\Models\User;
+        use App\Models\Post;
+    @endphp
 
     <form action="{{route('home')}}" method="GET">
         <input value="Back" type="submit">
     </form>
-
     {{$id->post_title}}<br>
-    Author: {{User::find($id->user_id)->name}}<br>
+    Author: {{$id->user->name}}<br>
     {{$id->post}}<br>
 
     Comments<br>
@@ -24,7 +26,7 @@
     @foreach($record as $item)
         @if($item->post_id == $id->id)
             <tr>
-                <td>Author:{{User::find($item->user_id)->name}}</td><br>
+                <td>Author:{{$item->user->name}}</td><br>
                 <td>{{$item->comment_post}}</a></td><br>
             </tr>
             @endif

@@ -41,6 +41,7 @@ class UserController extends BaseController
             return back()->with('error', 'Wrong Login Details');
         }
     }
+
     function logout()
     {
         Session::flush();

@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
-
 use Illuminate\Support\Facades\Auth;
+use App\Models\Auth as Auths;
 use App\Models\User;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 
 class UserController extends BaseController
@@ -18,9 +19,30 @@ class UserController extends BaseController
     public function login_page(){
         return view('/login');
     }
+    public function register_page(){
+        return view('/register');
+    }
+    public function register_verification(Request $request) {
+        $request->validate([
+            'name'=>'required',
+            'password'=>'required',
+            'email'=>'required'
+        ]);
+        $values = array(
+            'name' => $request->name,
+            'password'=> Hash::make($request->password),
+            'email' => $request->email
+        );
+        User::create($values);
+        $values = array(
+            'user_id' => User::where('name', $request->name)->first()->id,
+            'authentication' => 0
+        );
+        Auths::create($values);
+        return view('/login');
+    }
     public function home(){
-        $user = User::find(Auth::id());
-        return view('/home', ['user' => $user]);
+        return view('/home');
     }
     function verification(Request $request)
     {

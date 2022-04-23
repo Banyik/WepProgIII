@@ -44,8 +44,7 @@ class PostController extends BaseController
             'comment_post' => $request->comment
         );
         Comment::create($values);
-        $post = Post::find($post_id);
-        return view('post', ['id' => $post]);
+        return redirect()->back();
     }
     public function user_site($user_id) {
         $user = User::find($user_id);

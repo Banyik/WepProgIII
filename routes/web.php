@@ -20,11 +20,12 @@ Route::group(['middleware' => 'web'], function () {
     Route::group(['middleware' => [LoggedInMiddleware::class]], function() {
         Route::get('/', [UserController::class, 'home'])->name('home');
         Route::get('/home', [UserController::class, 'home']);
-        Route::get('/logout', [UserController::class, 'logout']);
+        Route::get('/logout', [UserController::class, 'logout'])->name('logout');
         Route::get('/create-post', [PostController::class, 'post_site'])->name('create_post');
         Route::post('/post-validate', [PostController::class, 'post_validate'])->name('post_validate');
         Route::get('/post/{id}', [PostController::class, 'post'])->name('post');
         Route::post('/post-comment/{id}', [PostController::class, 'post_comment'])->name('post_comment');
+        Route::get('/user/{id}', [PostController::class, 'user_site'])->name('user_site');
     });
     Route::group(['middleware' => [GuestMiddleware::class]], function() {
         Route::get('/login', [UserController::class, 'login_page']);

@@ -12,7 +12,7 @@
     <div class="flex flex-1">
         <div class="flex flex-col h-[90vh] flex-auto overflow-auto overflow-y-scroll">
             @foreach($record as $item)
-                <div class="backdrop-blur-md shadow-lg rounded p-2 m-1 bg-white/50 flex flex-col ">
+                <div class="inline float-right backdrop-blur-md shadow-lg rounded p-2 m-1 bg-white/50">
 
                     <p class="text-xl">
                         <a
@@ -21,18 +21,24 @@
                         </a>
                     </p>
 
-                    <p class="text-sm">
+                    <p class="text-sm mr-1">
                         <a
-                            class="hover:text-cyan-900 hover:underline" href="{{route('user_site', $item->user_id)}}">
+                            class="-mt-1 hover:text-cyan-900 hover:underline" href="{{route('user_site', $item->user_id)}}">
                             {{$item->user->name}}</a> {{$item->created_at->format('Y-m-d')}}
                         @if(Auth::check())
                             @if($item->user->id == Auth::id() || User::find(Auth::id())->auth->authentication == 9)
-                            <a
-                                class="hover:text-cyan-900 hover:underline" href="{{route('home', $item->user_id)}}">
-                                Edit</a>
-                            <a
-                                class="hover:text-cyan-900 hover:underline" href="{{route('home', $item->user_id)}}">
-                                Delete</a>
+                            <form class="inline"  method="GET" href="{{route('home', $item->id)}}">
+                                @csrf
+                                <button type="submit" class="mr-1 text-sm hover:text-cyan-900 hover:underline" >
+                                    Edit
+                                </button>
+                            </form>
+                            <form class="inline"  method="POST" action="{{route('delete_post', $item->id)}}">
+                                @csrf
+                                <button type="submit" class="mr-1 text-sm hover:text-cyan-900 hover:underline" >
+                                    Delete
+                                </button>
+                            </form>
                             @endif
                         @endif
                     </p>

@@ -46,6 +46,11 @@ class PostController extends BaseController
         Comment::create($values);
         return redirect()->back();
     }
+    public function delete_post($post_id){
+        $post = Post::find($post_id);
+        $post->delete();
+        return redirect()->back();
+    }
     public function user_site($user_id) {
         $user = User::find($user_id);
         return view('user', ['id' => $user]);

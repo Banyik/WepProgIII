@@ -1,7 +1,7 @@
 @extends('layout.master')
 @section('title', 'Login')
 @section('content')
-    <div class="grid place-items-center  h-[80vh] ">
+    <div class="grid place-items-center h-[80vh] ">
         <div class="items-center justify-center backdrop-blur-sm shadow-lg rounded p-8 m-1 bg-white/50 ">
             <form action="{{route('register_verification')}}" method="POST">
                 @csrf

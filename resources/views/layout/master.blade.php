@@ -7,8 +7,13 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="https://cdn.tailwindcss.com"></script>
     <title>@yield('title')</title>
+    <style>
+        ::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
 </head>
-<body class="bg-gradient-to-r from-cyan-400 to-blue-500">
+<body style="background-image:url({{url('/img/bgimg.jfif')}})" class="overflow-hidden bg-fixed bg-no-repeat bg-cover" >
 <div class="flex font-mono">
     <a href="{{route('home')}}">
         <p class="p-2 text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-br from-blue-900 to-cyan-600">Wonder Place</p>

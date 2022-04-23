@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comment;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Post;
 use Illuminate\Http\Request;
@@ -18,11 +19,12 @@ class PostController extends BaseController
         $request->validate([
             'post_title'=>'required'
         ]);
-        $post = new Post();
-        $post->user_id = Auth::id();
-        $post->post_title = $request->post_title;
-        $post->post = $request->post_content;
-        $post->save();
+        $values = array(
+            'user_id' => Auth::id(),
+            'post_title' => $request->post_title,
+            'post' => $request->post_content
+        );
+        Post::create($values);
         return redirect()->route('home');
     }
     public function post_site(){
@@ -36,12 +38,17 @@ class PostController extends BaseController
         $request->validate([
             'comment'=>'required'
         ]);
-        $comment = new Comment();
-        $comment->user_id = Auth::id();
-        $comment->post_id = $post_id;
-        $comment->comment_post = $request->comment;
-        $comment->save();
+        $values = array(
+            'user_id' => Auth::id(),
+            'post_id'=> $post_id,
+            'comment_post' => $request->comment
+        );
+        Comment::create($values);
         $post = Post::find($post_id);
         return view('post', ['id' => $post]);
+    }
+    public function user_site($user_id) {
+        $user = User::find($user_id);
+        return view('user', ['id' => $user]);
     }
 }

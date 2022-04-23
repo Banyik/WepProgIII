@@ -46,5 +46,8 @@ class User extends Authenticatable
     public function auth(){
         return $this->hasOne(Auth::class, 'user_id');
     }
+    public function post(){
+        return $this->hasMany(Post::class, 'user_id')->orderBy('id', 'desc');
+    }
 
 }

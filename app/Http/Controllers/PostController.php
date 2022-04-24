@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Comment;
 use App\Models\User;
+use Dompdf\Dompdf;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Post;
 use Illuminate\Http\Request;
@@ -54,5 +55,14 @@ class PostController extends BaseController
     public function user_site($user_id) {
         $user = User::find($user_id);
         return view('user', ['id' => $user]);
+    }
+    public function post_raw($post_id){
+        $post = Post::find($post_id);
+        $dompdf = new Dompdf();
+        $dompdf->loadHtml(view('post_raw', ['id' => $post]));
+        $dompdf->setPaper('A4', 'landscape');
+        $dompdf->render();
+        $dompdf->stream('post.pdf',['Attachment'=>false]);
+        return view('post_raw', ['id' => $post]);
     }
 }

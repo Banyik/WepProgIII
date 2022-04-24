@@ -12,7 +12,7 @@
         <input value="Back" type="submit">
     </form>
     <div class="flex flex-1">
-        <div class="float-left flex flex-col flex-auto">
+        <div id="pdf" class="float-left flex flex-col flex-auto">
             <div class="float-left backdrop-blur-sm shadow-lg rounded p-2 m-1 bg-white/50">
                 <p class="text-3xl">{{$id->post_title}}</p>
                 <p class="text-sm">Author: <a class="hover:text-cyan-900 hover:underline"  href="{{route('user_site',$id->user_id)}}">{{$id->user->name}}</a> {{$id->created_at->format('Y-m-d')}}</p>
@@ -23,7 +23,9 @@
                 echo $text = $id->post;
                 ?>
             </div>
+            <a class="w-max p-1 rounded hover:backdrop-blur-sm hover:text-white/70 hover:bg-cyan-700/70 bg-white/50 m-1"  href="{{route('post_raw',$id->id)}}">Open as PDF</a>
         </div>
+
 
         <div class="float-right">
             <div class="bg-white/50 backdrop-blur-sm max-h-full flex grow-0 flex-col shadow-lg rounded p-1 m-1">
@@ -62,3 +64,12 @@
             @endif
     @endforeach
 @endsection
+
+
+<script type="text/javascript">
+    var doc = new jsPDF();
+    function saveDiv(id, title) {
+        doc.fromHTML(`<html><head><title>${title}</title></head><body> + <div><div>` + document.getElementById(id).innerHTML + `</div></div></body></html>`);
+        doc.save('title.pdf');
+    }
+</script>

@@ -52,6 +52,11 @@ class PostController extends BaseController
         $post->delete();
         return redirect()->back();
     }
+    public function delete_comment($comment_id){
+        $comment = Comment::find($comment_id);
+        $comment->delete();
+        return redirect()->back();
+    }
     public function user_site($user_id) {
         $user = User::find($user_id);
         return view('user', ['id' => $user]);

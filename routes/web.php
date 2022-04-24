@@ -26,6 +26,7 @@ Route::group(['middleware' => 'web'], function () {
         Route::post('/post-comment/{id}', [PostController::class, 'post_comment'])->name('post_comment');
         Route::get('/user/{id}', [PostController::class, 'user_site'])->name('user_site');
         Route::post('/delete/{id}', [PostController::class, 'delete_post'])->name('delete_post');
+        Route::get('/post_raw/{id}', [PostController::class, 'post_raw'])->name('post_raw');
     });
     Route::group(['middleware' => [GuestMiddleware::class]], function() {
         Route::get('/login', [UserController::class, 'login_page'])->name('login');

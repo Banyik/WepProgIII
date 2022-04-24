@@ -7,16 +7,14 @@
     <div class="flex flex-1">
 
             <div class="float-left flex flex-col flex-auto">
-                <div class="float-left backdrop-blur-sm shadow-lg rounded p-2 m-1 bg-white/50">
-                    <form action="{{route('post_validate')}}" method="POST">
+                <div class="float-left backdrop-blur-sm shadow-lg rounded p-2 m-1 my-10 bg-white/50">
+                    <form id="postForm" name="postForm" action="{{route('post_validate')}}" method="POST">
                         @csrf
                         <input required class="w-full text-base flex-col backdrop-blur-sm shadow-lg my-1 rounded bg-white/5 focus:outline-none focus:outline-white border-transparent border-2 focus:ring" placeholder="Title of the post" name="post_title">
-                        <textarea required class="w-full h-full text-base resize-y flex flex-col my-1 backdrop-blur-sm shadow-lg rounded bg-white/5 focus:outline-none focus:outline-white border-transparent border-2 focus:ring" placeholder="Content of the post" name="post_content"></textarea>
-                        <input class="text-center rounded p-2 m-1 hover:backdrop-blur-sm hover:text-white/70 hover:bg-cyan-700/70 bg-white/50" type="submit" onclick="this.hidden=true" value="Submit">
+                        <textarea required class="w-full h-96 text-base resize-y flex flex-col my-1 backdrop-blur-sm shadow-lg rounded bg-white/5 focus:outline-none focus:outline-white border-transparent border-2 focus:ring" placeholder="Content of the post" name="post_content"></textarea>
+                        <input onclick="preventMultipleSubmit()" name="submit" class="text-center rounded p-2 m-1 hover:backdrop-blur-sm hover:text-white/70 hover:bg-cyan-700/70 bg-white/50" type="submit" value="Submit">
                     </form>
                 </div>
-
-
             </div>
 
         <div class="float-right">
@@ -41,3 +39,13 @@
     </div>
 
 @endsection
+<script>
+    function preventMultipleSubmit(){
+        var username = document.forms['postForm']['post_title'].value;
+        var password = document.forms['postForm']['post_content'].value;
+        var button = document.forms['postForm']['submit'];
+        if(username !== "" && password !== ""){
+            button.hidden = true;
+        }
+    }
+</script>

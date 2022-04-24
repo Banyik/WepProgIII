@@ -41,10 +41,10 @@
 @endsection
 <script>
     function preventMultipleSubmit(){
-        var username = document.forms['postForm']['post_title'].value;
-        var password = document.forms['postForm']['post_content'].value;
+        var post_title = document.forms['postForm']['post_title'].value;
+        var post_content = document.forms['postForm']['post_content'].value;
         var button = document.forms['postForm']['submit'];
-        if(username !== "" && password !== ""){
+        if(post_title !== "" && post_content !== ""){
             button.hidden = true;
         }
     }

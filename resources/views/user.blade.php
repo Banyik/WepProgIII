@@ -9,11 +9,14 @@
     @endphp
 
 <div class="flex flex-1">
-    <div class="flex flex-col h-[90vh] flex-auto overflow-auto overflow-y-scroll">
-        <div class="backdrop-blur-md shadow-lg rounded p-2 m-1 bg-white/50 flex flex-col ">
+    <div class="flex flex-col w-full">
+        <div class="backdrop-blur-md shadow-lg rounded p-2 m-1 bg-white/70 flex flex-col ">
             <p class="text-2xl">{{$id->name}}</p>
             <p>Joined in: {{$id->created_at->format('Y')}}</p>
         </div>
+
+    <div class="w-full flex flex-col h-[80vh] flex-auto overflow-auto overflow-y-scroll">
+
         @foreach($record as $item)
 
             <div class="inline float-right backdrop-blur-md shadow-lg rounded p-2 m-1 bg-white/50">
@@ -50,7 +53,7 @@
         @endforeach
 
     </div>
-
+</div>
     <div class="float-right">
         <div class="bg-white/50 backdrop-blur-sm max-h-full flex grow-0 flex-col shadow-lg rounded p-1 m-1">
             @if(Auth::check())

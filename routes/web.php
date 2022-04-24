@@ -25,7 +25,8 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('/post/{id}', [PostController::class, 'post'])->name('post');
         Route::post('/post-comment/{id}', [PostController::class, 'post_comment'])->name('post_comment');
         Route::get('/user/{id}', [PostController::class, 'user_site'])->name('user_site');
-        Route::post('/delete/{id}', [PostController::class, 'delete_post'])->name('delete_post');
+        Route::post('/delete-post/{id}', [PostController::class, 'delete_post'])->name('delete_post');
+        Route::post('/delete-comment/{id}', [PostController::class, 'delete_comment'])->name('delete_comment');
         Route::get('/post_raw/{id}', [PostController::class, 'post_raw'])->name('post_raw');
     });
     Route::group(['middleware' => [GuestMiddleware::class]], function() {

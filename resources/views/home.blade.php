@@ -27,7 +27,7 @@
                             {{$item->user->name}}</a> {{$item->created_at->format('Y-m-d')}}
                         @if(Auth::check())
                             @if($item->user->id == Auth::id() || User::find(Auth::id())->auth->authentication == 9)
-                            <form class="inline"  method="GET" href="{{route('home', $item->id)}}">
+                            <form class="inline"  method="GET" action="{{route('post_edit', $item->id)}}">
                                 @csrf
                                 <button type="submit" class="mr-1 text-sm hover:text-cyan-900 hover:underline" >
                                     Edit

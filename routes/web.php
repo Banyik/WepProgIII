@@ -23,6 +23,8 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('/create-post', [PostController::class, 'post_site'])->name('create_post');
         Route::post('/post-validate', [PostController::class, 'post_validate'])->name('post_validate');
         Route::get('/post/{id}', [PostController::class, 'post'])->name('post');
+        Route::get('/post-edit/{id}', [PostController::class, 'post_edit'])->name('post_edit');
+        Route::post('/post-validate/{id}', [PostController::class, 'post_edit_validate'])->name('post_edit_validate');
         Route::post('/post-comment/{id}', [PostController::class, 'post_comment'])->name('post_comment');
         Route::get('/user/{id}', [PostController::class, 'user_site'])->name('user_site');
         Route::post('/delete-post/{id}', [PostController::class, 'delete_post'])->name('delete_post');
@@ -38,5 +40,6 @@ Route::group(['middleware' => 'web'], function () {
     Route::group(['middleware' => [AnyMiddleware::class]], function() {
         Route::get('/', [UserController::class, 'home'])->name('home');
         Route::get('/home', [UserController::class, 'home']);
+        Route::get('/uploads/{filename}', [PostController::class, 'uploads']);
     });
 });

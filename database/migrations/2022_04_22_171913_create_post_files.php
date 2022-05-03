@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('post_files', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('post_id');
-            $table->string('file',11);
+            $table->string('file',1000);
             $table->timestamps();
         });
     }

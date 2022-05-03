@@ -4,7 +4,7 @@
     @php
         use App\Models\Post;
         use App\Models\User;
-        $record = $id->post()->get();
+        $records = $id->post()->get();
 
     @endphp
 
@@ -17,7 +17,7 @@
 
     <div class="w-full flex flex-col h-[80vh] flex-auto overflow-auto overflow-y-scroll">
 
-        @foreach($record as $item)
+        @foreach($records as $item)
 
             <div class="inline float-right backdrop-blur-md shadow-lg rounded p-2 m-1 bg-white/50">
 

@@ -32,8 +32,7 @@ class PostController extends BaseController
 
     public function post_validate(Request $request) {
         $request->validate([
-            'post_title'=>'required',
-            'file' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048'
+            'post_title'=>'required'
         ]);
         $values = array(
             'user_id' => Auth::id(),

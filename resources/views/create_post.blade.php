@@ -8,7 +8,7 @@
 
             <div class="float-left flex flex-col flex-auto">
                 <div class="float-left backdrop-blur-sm shadow-lg rounded p-2 m-1 my-10 bg-white/50">
-                    <form enctype="multipart/form-data" id="postForm" name="postForm" action="{{route('postEditValidate')}}" method="POST">
+                    <form enctype="multipart/form-data" id="postForm" name="postForm" action="{{route('post_validate')}}" method="POST">
                         @csrf
                         <input required class="w-full text-base flex-col backdrop-blur-sm shadow-lg my-1 rounded bg-white/5 focus:outline-none focus:outline-white border-transparent border-2 focus:ring" placeholder="Title of the post" name="post_title">
                         <textarea required class="w-full h-96 text-base resize-y flex flex-col my-1 backdrop-blur-sm shadow-lg rounded bg-white/5 focus:outline-none focus:outline-white border-transparent border-2 focus:ring" placeholder="Content of the post" name="post_content"></textarea>

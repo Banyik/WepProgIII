@@ -35,9 +35,18 @@
                 <div class=" float-left backdrop-blur-sm shadow-lg rounded p-2 m-1 bg-white/50">
                     <?php
                     echo $text = $id->post;
-                    $content = $id->postFile->file;
+                    $hasFile = false;
+                    try {
+                        $content = $id->postFile->file;
+                        $hasFile = true;
+                    }
+                    catch (Exception $e){
+
+                    }
                     ?>
-                    <img src={{asset('uploads/'.$content )}}/>
+                    @if ($hasFile)
+                        <img src={{asset('uploads/'.$content )}}/>
+                    @endif
                 </div>
                 <a class="w-max p-1 rounded hover:backdrop-blur-sm hover:text-white/70 hover:bg-cyan-700/70 bg-cyan-300/70 m-1"  href="{{route('post_raw',$id->id)}}">Open as PDF</a>
 
@@ -57,8 +66,6 @@
                                     <div class="inline float-right backdrop-blur-md shadow-lg rounded p-2 m-1 bg-white/50">
 
                                         <p class="text-xl">
-                                            <a
-                                                class="hover:text-cyan-900 hover:underline" href="{{route('post', $item)}}">
                                                 {{$item->comment_post}}
                                             </a>
                                         </p>
@@ -69,12 +76,6 @@
                                                 {{$item->user->name}}</a> {{$item->created_at->format('Y-m-d')}}
                                         @if(Auth::check())
                                             @if($item->user->id == Auth::id() || User::find(Auth::id())->auth->authentication == 9)
-                                                <form class="inline"  method="GET" href="{{route('home', $item->id)}}">
-                                                    @csrf
-                                                    <button type="submit" class="mr-1 text-sm hover:text-cyan-900 hover:underline" >
-                                                        Edit
-                                                    </button>
-                                                </form>
                                                 <form class="inline"  method="POST" action="{{route('delete_comment', $item->id)}}">
                                                     @csrf
                                                     <button type="submit" class="mr-1 text-sm hover:text-cyan-900 hover:underline" >
